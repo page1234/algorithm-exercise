@@ -28,7 +28,7 @@ public class MedianExercise {
 
         return mergeResidueInSecondListIntoMergedList(
                 secondList,
-                mergeFirstListIntoMergedList(firstList, secondList, mergedList),
+                mergeFirstListAndSomeItemInSecondListIntoMergedList(firstList, secondList, mergedList),
                 mergedList);
     }
 
@@ -42,7 +42,7 @@ public class MedianExercise {
     }
 
 
-    private static int mergeFirstListIntoMergedList(List<Integer> firstList, List<Integer> secondList, List<Integer> mergedList) {
+    private static int mergeFirstListAndSomeItemInSecondListIntoMergedList(List<Integer> firstList, List<Integer> secondList, List<Integer> mergedList) {
         int secondListIndex = 0;
         for (int firstListIndex = 0, size = firstList.size(); firstListIndex < size; firstListIndex++) {
             int valueInFirstList = firstList.get(firstListIndex);
