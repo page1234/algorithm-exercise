@@ -24,13 +24,12 @@ public class MedianExercise {
 
 
     public static List<Integer> merge(List<Integer> firstList, List<Integer> secondList) {
-        int secondListIndex = 0;
         List<Integer> mergedList = new ArrayList<Integer>();
 
-        secondListIndex = mergeFirstListIntoMergedList(firstList, secondList, secondListIndex, mergedList);
-        mergeResidueInSecondListIntoMergedList(secondList, secondListIndex, mergedList);
-
-        return mergedList;
+        return mergeResidueInSecondListIntoMergedList(
+                secondList,
+                mergeFirstListIntoMergedList(firstList, secondList, mergedList),
+                mergedList);
     }
 
     public static float medianFromTwoList(List<Integer> firstList, List<Integer> secondList) {
@@ -43,7 +42,8 @@ public class MedianExercise {
     }
 
 
-    private static int mergeFirstListIntoMergedList(List<Integer> firstList, List<Integer> secondList, int secondListIndex, List<Integer> mergedList) {
+    private static int mergeFirstListIntoMergedList(List<Integer> firstList, List<Integer> secondList, List<Integer> mergedList) {
+        int secondListIndex = 0;
         for (int firstListIndex = 0, size = firstList.size(); firstListIndex < size; firstListIndex++) {
             int valueInFirstList = firstList.get(firstListIndex);
 
