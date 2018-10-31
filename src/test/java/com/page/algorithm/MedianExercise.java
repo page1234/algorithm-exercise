@@ -25,28 +25,10 @@ public class MedianExercise {
 
     public static List<Integer> merge(List<Integer> firstList, List<Integer> secondList) {
         int secondListIndex = 0;
-        int secondListSize = secondList.size();
-
         List<Integer> mergedList = new ArrayList<Integer>();
-        for (int index = 0, size = firstList.size(); index < size; index++) {
-            int valueInFirstList = firstList.get(index);
-            if (secondListIndex >= secondListSize) {
-                mergedList.add(valueInFirstList);
-            } else {
-                int valueInSecondList = secondList.get(secondListIndex);
-                if (valueInFirstList < valueInSecondList) {
-                    mergedList.add(valueInFirstList);
-                } else {
-                    mergedList.add(valueInSecondList);
-                    secondListIndex++;
-                    index--;
-                }
-            }
-        }
 
-        for (int index = secondListIndex; index < secondListSize; index++) {
-            mergedList.add(secondList.get(index));
-        }
+        secondListIndex = mergeFirstListIntoMergedList(firstList, secondList, secondListIndex, mergedList);
+        mergeResidueInSecondListIntoMergedList(secondList, secondListIndex, mergedList);
 
         return mergedList;
     }
@@ -54,5 +36,37 @@ public class MedianExercise {
     public static float medianFromTwoList(List<Integer> firstList, List<Integer> secondList) {
         List<Integer> list = merge(firstList, secondList);
         return median(list);
+    }
+
+    private static boolean hasNoValueInList(int secondListIndex, List<Integer> list) {
+        return secondListIndex >= list.size();
+    }
+
+
+    private static int mergeFirstListIntoMergedList(List<Integer> firstList, List<Integer> secondList, int secondListIndex, List<Integer> mergedList) {
+        for (int firstListIndex = 0, size = firstList.size(); firstListIndex < size; firstListIndex++) {
+            int valueInFirstList = firstList.get(firstListIndex);
+
+            if (hasNoValueInList(secondListIndex, secondList)) {
+                mergedList.add(valueInFirstList);
+                continue;
+            }
+
+            int valueInSecondList = secondList.get(secondListIndex);
+            mergedList.add(valueInFirstList < valueInSecondList ? valueInFirstList : valueInSecondList);
+            if (valueInFirstList >= valueInSecondList) {
+                secondListIndex++;
+                firstListIndex--;
+            }
+        }
+        return secondListIndex;
+    }
+
+
+    private static List<Integer> mergeResidueInSecondListIntoMergedList(List<Integer> secondList, int secondListIndex, List<Integer> mergedList) {
+        for (int index = secondListIndex; index < secondList.size(); index++) {
+            mergedList.add(secondList.get(index));
+        }
+        return mergedList;
     }
 }
