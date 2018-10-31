@@ -2,6 +2,7 @@ package com.page.algorithm;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -77,4 +78,25 @@ public class ExerciseTest {
 
         assertEquals(Arrays.asList(1, 1, 2, 2), mergedList);
     }
+
+    @Test
+    public void shouldGetRightMedianFromTwoList() {
+        List<Integer> list = Arrays.asList(1, 999, 1001, 10000);
+        List<Integer> firstList = new ArrayList<Integer>();
+        List<Integer> secondList = new ArrayList<Integer>();
+        for (int value : list) {
+            int diceValue = (int) (Math.random() * 10) % 2;
+            if (diceValue == 0) {
+                firstList.add(value);
+            } else {
+                secondList.add(value);
+            }
+        }
+
+        float median = MedianExercise.medianFromTwoList(firstList, secondList);
+
+        assertEquals(1000, median, 0);
+    }
+
+
 }

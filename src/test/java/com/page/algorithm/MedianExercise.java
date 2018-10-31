@@ -50,4 +50,9 @@ public class MedianExercise {
 
         return mergedList;
     }
+
+    public static float medianFromTwoList(List<Integer> firstList, List<Integer> secondList) {
+        List<Integer> list = merge(firstList, secondList);
+        return median(list);
+    }
 }
